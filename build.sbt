@@ -7,7 +7,7 @@ organization := "me.jeffmay"
 
 name := "secure-string-context"
 
-version := "1.0.0"
+version := "1.1.0"
 
 // TODO: Cross-compile
 scalaVersion := "2.10.4"
