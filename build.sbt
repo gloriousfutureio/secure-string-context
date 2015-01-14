@@ -7,11 +7,12 @@ organization := "me.jeffmay"
 
 name := "secure-string-context"
 
-version := "0.0.1"
+version := "1.0.0"
 
 // TODO: Cross-compile
 scalaVersion := "2.10.4"
 
+// Needed for testing compilation
 val shapeless = Def setting (
   CrossVersion partialVersion scalaVersion.value match {
     case Some((2, scalaMajor)) if scalaMajor >= 11 =>
