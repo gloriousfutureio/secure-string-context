@@ -1,16 +1,29 @@
-import sbt._
-import sbt.Keys._
-
-organizationName := "Jeff May"
-
-organization := "me.jeffmay"
 
 name := "secure-string-context"
 
-version := "1.1.0"
+organization := "me.jeffmay"
 
-// TODO: Cross-compile
-scalaVersion := "2.10.4"
+organizationName := "Jeff May"
+
+version := "2.0.0"
+
+crossScalaVersions := Seq("2.11.6", "2.10.4")
+
+scalacOptions ++= {
+  // the deprecation:false flag is only supported by scala >= 2.11.3, but needed for scala >= 2.11.0 to avoid warnings
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, scalaMinor)) if scalaMinor >= 11 =>
+      // For scala versions >= 2.11.3
+      Seq("-Xfatal-warnings", "-deprecation:false")
+    case Some((2, scalaMinor)) if scalaMinor < 11 =>
+      // For scala versions 2.10.x
+      Seq("-Xfatal-warnings", "-deprecation")
+  }
+} ++ Seq(
+  "-feature",
+  "-Ywarn-dead-code",
+  "-encoding", "UTF-8"
+)
 
 // Needed for testing compilation
 val shapeless = Def setting (
@@ -23,25 +36,19 @@ val shapeless = Def setting (
 )
 
 libraryDependencies ++= Seq(
-  "org.scalacheck" %% "scalacheck" % "1.11.3" % "test",
-  "org.scalatest" %% "scalatest" % "2.1.0" % "test",
+  "org.scala-lang" % "scala-reflect" % scalaVersion.value,
+  "org.scalacheck" %% "scalacheck" % "1.12.1" % "test",
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
   shapeless.value % "test",
   "com.typesafe.play" %% "play-functional" % "2.4.0-M2"
 )
 
+// disable compilation of ScalaDocs, since this always breaks on links
 sources in(Compile, doc) := Seq.empty
 
-// enable publishing the jar produced by `test:package`
-publishArtifact in(Test, packageBin) := true
+// disable publishing empty ScalaDocs
+publishArtifact in (Compile, packageDoc) := false
 
-// enable publishing the test sources jar
-publishArtifact in(Test, packageSrc) := true
+bintraySettings ++ bintrayPublishSettings
 
-scalacOptions ++= Seq(
-  "-feature",
-  "-deprecation",
-  "-Xfatal-warnings",
-  "-Xlint",
-  "-Ywarn-dead-code",
-  "-encoding", "UTF-8"
-)
+licenses += ("Apache-2.0", url("http://opensource.org/licenses/apache-2.0"))
