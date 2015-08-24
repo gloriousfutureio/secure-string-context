@@ -1,3 +1,23 @@
+<a href='https://travis-ci.org/jeffmay/secure-string-context'>
+  <img src='https://travis-ci.org/jeffmay/secure-string-context.svg' alt='Build Status' />
+</a>
+<a href='https://coveralls.io/github/jeffmay/secure-string-context?branch=master'>
+  <img src='https://coveralls.io/repos/jeffmay/secure-string-context/badge.svg?branch=master&service=github' alt='Coverage Status' />
+</a>
+</a>
+<table>
+  <tr>
+    <th>secure-string-context</th>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://bintray.com/jeffmay/maven/secure-string-context/_latestVersion'>
+        <img src='https://api.bintray.com/packages/jeffmay/maven/secure-string-context/images/download.svg'>
+      </a>
+    </td>
+  </tr>
+</table>
+
 Secure String Context
 =====================
 
