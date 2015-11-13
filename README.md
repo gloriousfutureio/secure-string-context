@@ -53,19 +53,19 @@ And all types can be forcibly stringified with the `raw` method.
     <th>value: [T: Safe]</th>
   </tr>
   <tr>
-    <th>ss"$value"<th>
+    <th>ss"$value"</th>
     <td>X</td>
     <td>X</td>
     <td>√</td>
   </tr>
   <tr>
-    <th>ss"${safe(value)}"<th>
+    <th>ss"${safe(value)}"</th>
     <td>X</td>
     <td>√</td>
     <td>√</td>
   </tr>
   <tr>
-    <th>ss"${raw(value)}"<th>
+    <th>ss"${raw(value)}"</th>
     <td>√</td>
     <td>√</td>
     <td>√</td>
