@@ -17,15 +17,15 @@ package object strings {
      *
      * @param args the [[SafeString]]s to inject into the interpolated string context.
      */
-    def ss(args: SafeString*): String = {
+    def ss(args: SafeString*): SafeString = {
       // concatenate all the arguments as strings using the original StringContext
-      sc.s(args.map(_.asString): _*)
+      new SafeStringImpl(sc.s(args.map(_.asString): _*))
     }
 
     /**
      * More descriptive alias for [[ss]].
      */
-    def safe(args: SafeString*): String = ss(args: _*)
+    def safe(args: SafeString*): SafeString = ss(args: _*)
   }
 
   /**
@@ -35,7 +35,9 @@ package object strings {
     def asString: String
   }
 
-  private class SafeStringImpl(val asString: String) extends AnyVal with SafeString
+  private class SafeStringImpl(val asString: String) extends AnyVal with SafeString {
+    override def toString: String = asString
+  }
 
   /**
    * Allow the value to be converted to a string, regardless of if it is safe.
